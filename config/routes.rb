@@ -55,5 +55,12 @@ LancingMarket::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+
+    #Projects routing
+
+    match "/projects/new" => "Projects#create"
+    match "/projects/list" => "Projects#all"
+    match "/projects/:id" => "Projects#show"
+
     root :to => 'Home#index'
 end
