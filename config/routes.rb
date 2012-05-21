@@ -1,4 +1,6 @@
 LancingMarket::Application.routes.draw do
+  resources :contractants
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
