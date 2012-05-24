@@ -1,6 +1,9 @@
 LancingMarket::Application.routes.draw do
   resources :contractants
 
+  match 'login' => 'contractants#login'
+  match 'register' => 'contractants#new'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
