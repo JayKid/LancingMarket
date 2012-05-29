@@ -28,17 +28,25 @@
     <nav class="navbar">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="index.html">Online freelancing</a>
+          <a class="brand" href="/">Lancing Market</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li>
-                <a href="index.html">Inici</a>
-              </li>
               <li class="active">
-                <a href="register.html">Registrar-se</a>
+                <%= link_to "Inici", root_url %>
               </li>
               <li>
-                <a href="login.html">Entrar</a>
+                <% if current_user %>
+                  <%= link_to "Benvingut, #{current_user.username}", {:controller => :contraactants, :action => :show, :id => current_user.id } %>
+                <% else %>
+                  <%= link_to "Registrar-se", {:controller => :contractants, :action => "new"}%>
+                <% end %>
+              </li>
+              <li>
+                <% if current_user %>
+                  <%= link_to "Sortir", logout_path %>
+                <% else %>
+                  <a href="login.html">Entrar</a>
+                <% end %>
               </li>
             </ul>
             <form class="navbar-search pull-left" action>
@@ -55,76 +63,40 @@
         <div class="alert alert-block alert-success">
           <p>Ja ets usuari? Entra emprant la barra de login superior, o prement aquest botó:</p>
           <p>
-            <a class="btn" href="login.html">Entra</a>
+            <%= link_to "Login", {:controller => :contractants, :action => "login"}, :class => "btn" %>
           </p>
         </div>  
-        <%= form_for(@contractant) do |f| %>
+        <%= form_for(@contractant, :html => {:class => "well form-vertical"}) do |f| %>
           <% if @contractant.errors.any? %>
-            <span class="help-inline">
-              <h2><%= pluralize(@contractant.errors.count, "error") %> prohibited this contractant from being saved:</h2>
+              <h3><%= pluralize(@contractant.errors.count, "error") %> prohibited this contractant from being saved:</h2>
 
               <ul>
               <% @contractant.errors.full_messages.each do |msg| %>
                 <li><%= msg %></li>
               <% end %>
               </ul>
-            </div>
           <% end %>
 
-          <div class="field">
-            <%= f.label :username %><br />
-            <%= f.text_field :username %>
-          </div>
-          <div class="field">
-            <%= f.label :password %><br />
-            <%= f.password_field :password %>
-          </div>
-          <div class="field">
-            <%= f.label :password_confirmation %><br />
-            <%= f.password_field :password_confirmation %>
-          </div>
+            <%= f.label "Nom:" %>
+            <%= f.text_field :username, :class=>"span3", :placeholder=>"Entra el teu nom complet" %>
+
+            <%= f.label "Contrasenya:" %>
+            <%= f.password_field :password, :class=>"span3", :placeholder=>"Contrasenya" %>
+
+            <%= f.label "Confirmació de contrasenya:" %>
+            <%= f.password_field :password_confirmation, :class=>"span3", :placeholder=>"Confirma la teva contrasenya" %>
+
           <div class="actions">
             <%= f.submit "Envia", :class => "btn btn-success", :onClick =>"parent.location='home_contractista.html'"%>
             <button type="reset" value="Reset" class="btn">Reset</button>
           </div>
         <% end %>
-<!--         <form class="well form-vertical">
-          <label>Nom:</label>
-          <input type="text" class="span3" placeholder="Entra el teu nom complet">
-          <span class="help-inline">Només caràcters alfanumèrics permesos!</span>
-          
-          <label>Adreça de correu electrònic:</label>
-          <input type="text" class="span3" placeholder="Email">
-          <span class="help-inline">Un correu de confirmació serà enviat a aquesta adreça</span>
-
-          <label>Contrasenya:</label>
-          <input type="password" class="span3" placeholder="Contrasenya">
-
-          <label>Confirmació de contrasenya</label>
-          <input type="password" class="span3" placeholder="Confirma la teva contrasenya">
-
-          <label>Tipus de compte</label>
-          <select class="span3">
-            <option>Contractant</option>
-            <option>Freelance</option>
-          </select>
-
-          <div class="input-prepend">
-            <label>Usuari de Twitter</label>
-                    <span class="add-on">@</span>
-                    <input class="span2" id="prependedInput" size="16" type="text" placeholder="Nom d'usuari">
-                  </div>
- -->
-          <label class="checkbox">
-                <input type="checkbox">Accepto la llicència i els termes de privacitat
-              </label>
-        </form>
       </section>
     </section>
   </body>
 <script>
   $(document).ready(function() {
-    inserta_head_home();
+    // inserta_head_home();
     $(".nav-collapse .nav li:first").removeClass("active");
     $(".nav-collapse .nav li:eq(1)").addClass("active");
     inserta_footer();

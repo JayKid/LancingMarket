@@ -15,4 +15,9 @@ class Contractant < ActiveRecord::Base
       self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
     end
   end
+
+  def self.authenticate(username, password)
+    user = find_by_username(username)
+    return user if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
+  end
 end
