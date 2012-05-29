@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+      <meta charset="utf-8">
+      <title>PES - Register</title>
+      <meta name="description" content="">
+      <meta name="author" content="Grup 2">
+
+      <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+      <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+
+      <!-- Styles -->
+      <%= stylesheet_link_tag '/stylesheets/bootstrap' %>
+
+      <!-- Fav and touch icons -->
+      
+      <!-- incloure l'arxiu de utils javascript -->
+      <%= javascript_include_tag '/javascripts/utils', '/javascripts/bootstrap', '/javascripts/bootstrap-alert' %> 
+
+      <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <!-- Fav and touch icons -->
+  </head>
+
+  <body>
+
+    <nav class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Lancing Market</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active">
+                <%= link_to "Inici", root_url %>
+              </li>
+              <li>
+                <% if current_user %>
+                  <%= link_to "Benvingut, #{current_user.username}", {:controller => :contraactants, :action => :show, :id => current_user.id } %>
+                <% else %>
+                  <%= link_to "Registrar-se", {:controller => :contractants, :action => "new"}%>
+                <% end %>
+              </li>
+              <li>
+                <% if current_user %>
+                  <%= link_to "Sortir", logout_path %>
+                <% else %>
+                  <a href="login.html">Entrar</a>
+                <% end %>
+              </li>
+            </ul>
+            <form class="navbar-search pull-left" action>
+              <input type="text" class="search-query span2" placeholder="Cerca">
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section class="container">
+      <section class="center span8">
+        <h1>Crea un usuari</h1>
+        <div class="alert alert-block alert-success">
+          <p>Ja ets usuari? Entra emprant la barra de login superior, o prement aquest botó:</p>
+          <p>
+            <%= link_to "Login", {:controller => :contractants, :action => "login"}, :class => "btn" %>
+          </p>
+        </div>  
+        <%= form_for(@contractant, :html => {:class => "well form-vertical"}) do |f| %>
+          <% if @contractant.errors.any? %>
+              <h3><%= pluralize(@contractant.errors.count, "error") %> prohibited this contractant from being saved:</h2>
+
+              <ul>
+              <% @contractant.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+              </ul>
+          <% end %>
+
+            <%= f.label "Nom:" %>
+            <%= f.text_field :username, :class=>"span3", :placeholder=>"Entra el teu nom complet" %>
+
+            <%= f.label "Contrasenya:" %>
+            <%= f.password_field :password, :class=>"span3", :placeholder=>"Contrasenya" %>
+
+            <%= f.label "Confirmació de contrasenya:" %>
+            <%= f.password_field :password_confirmation, :class=>"span3", :placeholder=>"Confirma la teva contrasenya" %>
+
+          <div class="actions">
+            <%= f.submit "Envia", :class => "btn btn-success", :onClick =>"parent.location='home_contractista.html'"%>
+            <button type="reset" value="Reset" class="btn">Reset</button>
+          </div>
+        <% end %>
+      </section>
+    </section>
+  </body>
+<script>
+  $(document).ready(function() {
+    // inserta_head_home();
+    $(".nav-collapse .nav li:first").removeClass("active");
+    $(".nav-collapse .nav li:eq(1)").addClass("active");
+    inserta_footer();
+  });
+</script>
+</html>
+

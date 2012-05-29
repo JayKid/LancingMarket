@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Username:</b>
+  <%= @contractant.username %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%= @contractant.password %>
+</p>
+
+
+<%= link_to 'Edit', edit_contractant_path(@contractant) %> |
+<%= link_to 'Back', contractants_path %>
