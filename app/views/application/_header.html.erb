@@ -43,7 +43,7 @@
                 <% if current_user %>
                   <%= link_to "Sortir", logout_path %>
                 <% else %>
-                  <a href="login.html">Entrar</a>
+                  <%= link_to "Entrar", "/login" %>
                 <% end %>
               </li>
               <li>
