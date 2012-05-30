@@ -1,4 +1,8 @@
 LancingMarket::Application.routes.draw do
+  resources :projects do
+    resources :milestones
+  end
+  
   get "sessions/new"
 
   match 'login' => 'sessions#new', :as => "login"

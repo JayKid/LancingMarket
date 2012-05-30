@@ -1,6 +1,7 @@
 class Contractant < ActiveRecord::Base
   attr_accessible :username, :password, :password_confirmation
   attr_accessor :password
+  has_many :project
 
   before_save :encrypt_password
 

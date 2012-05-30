@@ -1,0 +1,42 @@
+
+	<section class="container">
+		<section class="center span8">
+			<h1>Afegir un projecte</h1>
+			<br>
+			<br>
+			<%= render 'form' %>
+		</section>
+	</section>
+</body>
+<footer>
+</footer>
+<script>
+		indice = 1;
+
+		function remove_milestone(id) {
+			$('#'+id).remove();
+			refresh_counter();
+		}
+
+		function refresh_counter() {
+			var sum = 0;
+			$(".import").each(function() {
+				if( (!isNaN( $(this).val() ) ) && ( $(this).val() != null ) && ( $(this).val() != "" ) ) sum += parseInt($(this).val());
+			});
+			$("#counter").val(sum);
+		}
+
+		$("#add_milestone").click(function(event){
+			indice += 1;
+			event.preventDefault();
+			$("#milestones").append('<div id="milestone-'+indice+'"><br><label>Numero</label><input type="number" class="span3" placeholder="Entra un nombre per a la fita"><span class="help-inline">Només caràcters numèrics permesos!</span><label>Import</label><input type="number" class="import span3" placeholder="Entra un import per a la fita" onchange="refresh_counter();"><span class="help-inline">Només caràcters numèrics permesos!</span><label>Descripció</label><textarea class="input-xxlarge" id="textarea" rows="3" placeholder="Escriu una descripció detallada de la fita"></textarea><span class="help-inline">Només caràcters alfanumèrics permesos!</span><br><br><a class="btn btn-danger remove_milestone" href="#" onclick="remove_milestone(\'milestone-'+indice+'\'); return false;"><i class="icon-trash icon-white"></i> Eliminar aquesta fita</a><br></div>');
+		});
+
+		$(document).ready(function(){
+			// inserta_head_contractant();
+			inserta_footer();
+		});
+		
+	
+</script>
+</html>

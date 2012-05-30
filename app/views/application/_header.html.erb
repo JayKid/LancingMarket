@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+      <meta charset="utf-8">
+      <title>Lancing Market</title>
+      <meta name="description" content="">
+      <meta name="author" content="Grup 2">
+
+      <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+      <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+
+      <!-- Styles -->
+      <%= stylesheet_link_tag '/stylesheets/bootstrap' %>
+
+      <!-- Fav and touch icons -->
+      
+      <!-- incloure l'arxiu de utils javascript -->
+      <%= javascript_include_tag '/javascripts/utils', '/javascripts/bootstrap', '/javascripts/bootstrap-alert' %> 
+
+      <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <!-- Fav and touch icons -->
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Lancing Market</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li>
+                <%= link_to "Inici", root_url %>
+              </li>
+              <li>
+                <% if current_user %>
+                  <%= link_to "Benvingut, #{current_user.username}", {:controller => :contractants, :action => :show, :id => current_user.id } %>
+                <% else %>
+                  <%= link_to "Registrar-se", {:controller => :contractants, :action => "new"}%>
+                <% end %>
+              </li>
+              <li>
+                <% if current_user %>
+                  <%= link_to "Sortir", logout_path %>
+                <% else %>
+                  <a href="login.html">Entrar</a>
+                <% end %>
+              </li>
+              <li>
+                <% if current_user %>
+                  <%= link_to "Afegir projecte", {:controller => :projects, :action => "new"} %>
+                <% end %>
+              </li>
+            </ul>
+            <form class="navbar-search pull-left" action>
+              <input type="text" class="search-query span2" placeholder="Cerca">
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 
+  number: 1
+  import: 9.99
+  description: MyText
+
+two:
+  id: 
+  number: 1
+  import: 9.99
+  description: MyText
