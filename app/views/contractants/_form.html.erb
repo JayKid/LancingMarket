@@ -5,7 +5,7 @@
         <div class="alert alert-block alert-success">
           <p>Ja ets usuari? Entra emprant la barra de login superior, o prement aquest botó:</p>
           <p>
-            <%= link_to "Login", {:controller => :contractants, :action => "login"}, :class => "btn" %>
+            <%= link_to "Login", "/login", :class => "btn" %>
           </p>
         </div>  
         <%= form_for(@contractant, :html => {:class => "well form-vertical"}) do |f| %>
