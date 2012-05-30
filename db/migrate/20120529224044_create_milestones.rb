@@ -5,7 +5,7 @@ class CreateMilestones < ActiveRecord::Migration
       t.integer :number
       t.decimal :import
       t.text :description
-
+      t.integer :project_id
       t.timestamps
     end
   end

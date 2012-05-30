@@ -11,12 +11,12 @@ class ProjectsController < ApplicationController
 
   def new
   	raise ActionController::RoutingError.new('Not found') unless current_user
-  	@project = Project.new
+  	@project = current_user.project.build
   	@project.milestone << Milestone.new
   end
 
   def create
-    @project = Project.new(params[:project])
+    @project = current_user.project.build(params[:project])
     params[:milestone].each_value { |milestone| 
     	@project.milestone.build(milestone)
     }
