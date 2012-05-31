@@ -1,0 +1,20 @@
+<div id="milestone_<%= index %>">
+   <%= fields_for "milestone[#{index}]", milestone do |m| %>
+     <br>
+     <%= m.label "Numero:" %>
+     <%= m.number_field :number, :class => "span3", :placeholder => "Entra un nombre per a la fita" %>
+     <span class="help-inline">Només caràcters numèrics permesos!</span>
+
+     <%= m.label "Import:" %>
+     <%= m.number_field :import, :class => "import span3", :placeholder => "Entra un import per a la fita", :onchange => "refresh_counter();"%>
+     <span class="help-inline">Només caràcters numèrics permesos!</span>
+
+     <%= m.label "Descripció:" %>
+     <%= m.text_area :description, :class => "input-xxlarge", :rows => "3", :id => "textarea", :placeholder => "Escriu una descripció detallada de la fita" %>
+     <span class="help-inline">Només caràcters alfanumèrics permesos!</span>
+     <br>
+     <br>
+     <a class="btn btn-danger remove_milestone" href="#" onclick="remove_milestone('milestone_<%= index %>'); return false;"><i class="icon-trash icon-white"></i> Eliminar aquesta fita</a>
+     <br>
+   <% end %>
+</div>

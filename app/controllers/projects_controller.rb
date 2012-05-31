@@ -9,10 +9,14 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def index
+    @projects = current_user.project.all
+  end
+  
   def new
   	raise ActionController::RoutingError.new('Not found') unless current_user
   	@project = current_user.project.build
-  	@project.milestone << Milestone.new
+  	@project.milestone.build
   end
 
   def create
@@ -21,11 +25,11 @@ class ProjectsController < ApplicationController
     	@project.milestone.build(milestone)
     }
     if @project.save
-      redirect_to root_url, :notice => "Saved!"
+      redirect_to "/projects/#{@project.id}", :notice => "Projecte afegit correctament!"
     else
       render "new"
     end  end
-  
+
   def all
   end
 end

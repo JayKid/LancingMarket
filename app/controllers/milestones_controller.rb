@@ -2,7 +2,8 @@ class MilestonesController < ApplicationController
   # GET /milestones
   # GET /milestones.json
   def index
-    @milestones = Milestone.all
+    project = Project.find(params[:project_id])
+    @milestones = project.milestone.all
 
     respond_to do |format|
       format.html # index.html.erb

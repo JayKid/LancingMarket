@@ -20,6 +20,19 @@
   <%= @project.description %>
 </p>
 
+<p>
+  <b>Fites:</b>
+	<ul>
+	  <%= @project.milestone.each do |milestone| %>
+			<li>
+					<p>Number: <%= milestone.number %></p>
+					<p>Import: <%= milestone.import %></p>
+					<p>Description: <%= milestone.description %></p>
+			</li>
+		<% end %>
+	</ul>
+</p>
+
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
